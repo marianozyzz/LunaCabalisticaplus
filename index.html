@@ -109,7 +109,7 @@ html,body{overscroll-behavior:none}.stage{touch-action:pan-y}.scene{backdrop-fil
 .bar .w{background:linear-gradient(135deg,#f6e3b4,#c69a58);color:#1a0c0c;font-weight:700;border:0;animation:pulse 2.4s infinite}
 .cta{min-height:64px;padding:0 40px;font-size:1.08rem;animation:pulse 2.2s infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(226,196,139,.55)}70%{box-shadow:0 0 0 22px rgba(226,196,139,0)}100%{box-shadow:0 0 0 0 rgba(226,196,139,0)}}
 .checks{list-style:none;padding:0;display:grid;gap:8px;max-width:540px;margin:18px auto 26px;text-align:left;color:var(--tx)}.checks li::before{content:"✦";color:var(--gold);margin-right:10px}.cta-note{margin-top:14px;color:var(--mu);font-size:.88rem}.final .social{opacity:.65;margin:22px 0 6px}.final .social a{padding:5px 14px;font-size:.78rem}
-.tags span::before{content:"";display:inline-block;width:14px;height:22px;background:var(--et) center/contain no-repeat;margin-right:8px;vertical-align:middle}
+
 .et2{left:-30px;right:auto;bottom:-34px;width:68px;animation-delay:-2s}.et3{right:-24px;top:46px;bottom:auto;width:56px;animation-delay:-3.4s}
 .sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}.stage{z-index:1}body.inpage .sky{display:none}
 </style></head><body>
@@ -147,7 +147,7 @@ html,body{overscroll-behavior:none}.stage{touch-action:pan-y}.scene{backdrop-fil
 <h3 style="font-size:1.5rem;color:var(--gold2)">Roberta Luna</h3>
 <p>Taróloga, numeróloga e psicoterapeuta com mais de uma década de experiência e pós-graduação em Mitologias Comparadas.</p>
 <p>Mentora de tarólogas que buscam excelência profissional: ensina método e profundidade para dominar a estrutura e o simbolismo do Tarot através da Cabala Hermética.</p>
-<img class="et" data-from=".guard" alt="Pequeno guardião cósmico"><img class="et et2" data-from=".guard" alt=""><img class="et et3" data-from=".guard" alt="">
+
 <div class="tags"><span>Hermetismo aplicado</span><span>Leitura profissional</span><span>Cabala prática</span></div></div></div>
 </section>
 
@@ -288,7 +288,7 @@ addEventListener('pointermove',e=>{tx=e.clientX/innerWidth*2-1;ty=e.clientY/inne
 if(addEventListener('deviceorientation',e=>{if(e.gamma!=null&&matchMedia('(pointer:coarse)').matches){tx=cl(e.gamma/30,-1,1);ty=cl((e.beta-45)/30,-1,1)}}));
 const btns=[...dots.children];route();
 addEventListener('wheel',e=>{if(virt()){vt=cl(vt+e.deltaY/(N*700),0,1);snap(220)}},{passive:true});
-let y0=0;const snap=(d=260)=>{clearTimeout(sT);sT=setTimeout(()=>{if(touching||document.body.classList.contains('inpage'))return;const m=mx;go(Math.round((virt()?vt:m>0?scrollY/m:0)*(N-1)))},d)};
+let y0=0;const snap=(d=260)=>{clearTimeout(sT);sT=setTimeout(()=>{return;const m=mx;go(Math.round((virt()?vt:m>0?scrollY/m:0)*(N-1)))},d)};
 addEventListener('touchstart',e=>{touching=true;vel=0;y0=e.touches[0].clientY},{passive:true});addEventListener('touchmove',e=>{const y=e.touches[0].clientY;if(virt()){vel=y0-y;vt=cl(vt+vel/(N*420),0,1)}y0=y},{passive:true});
 const te=()=>{touching=false;snap(virt()?600:260)};addEventListener('touchend',te);addEventListener('touchcancel',te);addEventListener('scroll',()=>snap(),{passive:true});
 addEventListener('keydown',e=>{if(!virt())return;const k={ArrowDown:1,PageDown:1,' ':1,ArrowUp:-1,PageUp:-1}[e.key];if(k){e.preventDefault();vt=cl(Math.round(vt*(N-1))+k,0,N-1)/(N-1)}});
