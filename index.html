@@ -235,7 +235,7 @@ else{
 $('#spacer').style.height=N*150+'vh';
 const R=(a,b)=>a+Math.random()*(b-a),add=(c,st)=>{const d=document.createElement('div');d.className=c;Object.assign(d.style,st);world.appendChild(d);return d};
 const Z0=-S*(N-1)-500;
-for(let i=0;i<(innerWidth<760?200:420);i++)add('star',{transform:`translate3d(${R(-2600,2600)}px,${R(-1200,7200)}px,${R(-1500,400)}px)`,opacity:R(.3,1)});
+for(let i=0;i<(innerWidth<760?70:160);i++)add('star',{transform:`translate3d(${R(-2600,2600)}px,${R(-1200,7200)}px,${R(-1500,400)}px)`,opacity:R(.3,1)});
 for(let i=0;i<N+1;i++)add('neb',{background:`radial-gradient(circle,${['rgba(198,154,88,.16)','rgba(120,86,36,.14)','rgba(226,196,139,.1)','rgba(150,110,50,.14)'][i%4]},transparent 65%)`,transform:`translate3d(${i%2?-900:900}px,${i*620}px,-300px)`});
 Object.values({...SYM,lu:document.querySelector('.guard').src}).forEach((src,i)=>{const im=add('sym',{transform:`translate3d(${(i%2?-1:1)*R(480,900)}px,${R(-380,380)}px,${-i*S*.9-300}px)`,animationDelay:-i*5+'s'});im.outerHTML=`<img class="sym" alt="" src="${src}" style="transform:translate3d(${(i%2?-1:1)*R(500,2200)}px,${i*600+R(-200,200)}px,-250px);animation-delay:${-i*5}s">`});
 const sm=x=>x*x*(3-2*x),cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
@@ -273,10 +273,10 @@ addEventListener('resize',measure);addEventListener('load',measure);measure();
 addEventListener('pointermove',e=>{tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1});
 if(addEventListener('deviceorientation',e=>{if(e.gamma!=null&&matchMedia('(pointer:coarse)').matches){tx=cl(e.gamma/30,-1,1);ty=cl((e.beta-45)/30,-1,1)}}));
 const btns=[...dots.children];route();
-addEventListener('wheel',e=>{if(virt()){vt=cl(vt+e.deltaY/(N*700),0,1);snap(220)}},{passive:true});
+addEventListener('wheel',e=>{if(virt()){vt=cl(vt+e.deltaY/(N*700),0,1)}},{passive:true});
 let y0=0;const snap=(d=200)=>{clearTimeout(sT);sT=setTimeout(()=>{if(touching||document.body.classList.contains('inpage'))return;const m=document.documentElement.scrollHeight-innerHeight;go(Math.round((virt()?vt:m>0?scrollY/m:0)*(N-1)))},d)};
 addEventListener('touchstart',e=>{touching=true;vel=0;y0=e.touches[0].clientY},{passive:true});addEventListener('touchmove',e=>{const y=e.touches[0].clientY;if(virt()){vel=y0-y;vt=cl(vt+vel/(N*420),0,1)}y0=y},{passive:true});
-const te=()=>{touching=false;snap(virt()?600:220)};addEventListener('touchend',te);addEventListener('touchcancel',te);addEventListener('scroll',()=>snap(),{passive:true});
+const te=()=>{touching=false};addEventListener('touchend',te);addEventListener('touchcancel',te);
 addEventListener('keydown',e=>{if(!virt())return;const k={ArrowDown:1,PageDown:1,' ':1,ArrowUp:-1,PageUp:-1}[e.key];if(k){e.preventDefault();vt=cl(Math.round(vt*(N-1))+k,0,N-1)/(N-1)}});
 (function f(t){
 const m=document.documentElement.scrollHeight-innerHeight,tg=virt()?vt:(m>0?scrollY/m:0);{const dt=Math.min(50,t-(lt||t));lt=t;cur+=(tg-cur)*(1-Math.exp(-dt/170))}if(virt()&&Math.abs(vel)>.01){vt=cl(vt+vel/(N*420),0,1);vel*=.93}
